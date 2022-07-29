@@ -19,8 +19,13 @@
 
   "environment": "*",
   "entrypoints": {
-    "client": ["pepjebs.nomorepurple.client.NoMorePurpleClientMod"]
+    "client": ["pepjebs.no_more_purple.client.NoMorePurpleClientMod"],
+    "modmenu": ["pepjebs.no_more_purple.config.NoMorePurpleModMenuApiImpl"]
   },
+  "mixins": [
+    "no_more_purple.mixins.json"
+  ],
+  "accessWidener": "no_more_purple.accesswidener",
 
   "depends": {
     "fabricloader": ">=0.14.6",
