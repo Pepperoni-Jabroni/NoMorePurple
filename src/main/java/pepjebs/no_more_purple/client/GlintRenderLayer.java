@@ -49,6 +49,7 @@ public class GlintRenderLayer extends RenderLayer {
             list.add(func.apply(color.getName()));
 
         list.add(func.apply("rainbow"));
+        list.add(func.apply("light"));
         list.add(func.apply("none"));
 
         return list;

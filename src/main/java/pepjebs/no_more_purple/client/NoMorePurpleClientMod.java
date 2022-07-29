@@ -34,6 +34,7 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
             dispatcher.register(
                     ClientCommandManager.literal(COMMAND_ID)
                             .then(ClientCommandManager.argument(COMMAND_ID, StringArgumentType.string())
+                                .suggests(new GlintColorSuggestionProvider())
                                 .executes(context -> {
                                     CONFIG.GLINT_COLOR = context.getArgument(COMMAND_ID, String.class);
                                     return 0;
@@ -41,6 +42,31 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
                             )
             );
         });
+    }
+
+    public static String[] listGlintColors() {
+        return new String[]{
+                "white",
+                "orange",
+                "magenta",
+                "light_blue",
+                "yellow",
+                "lime",
+                "pink",
+                "gray",
+                "light_gray",
+                "cyan",
+                "purple",
+                "blue",
+                "brown",
+                "green",
+                "red",
+                "black",
+                "rainbow",
+                "light",
+                "none",
+                "off"
+        };
     }
 
     private static int changeColor() {
@@ -52,8 +78,12 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
                 .orElse(-1);
         if (confColor.compareTo("rainbow") == 0) {
             color = DyeColor.values().length;
-        } else if (confColor.compareTo("none") == 0){
+        } else if (confColor.compareTo("light") == 0){
             color = DyeColor.values().length + 1;
+        } else if (confColor.compareTo("none") == 0){
+            color = DyeColor.values().length + 2;
+        } else if (confColor.compareTo("off") == 0){
+            color = -1;
         }
         return color;
     }
