@@ -1,4 +1,4 @@
-# NoMorePurple
+# No More Purple
 A client-side mod allowing you to choose your enchantment glint color
 
 Use the config, use ModMenu, or use the `/glint_color <color>` command to set the Glint Color of Enchanted Items on your client.
