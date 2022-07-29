@@ -1,32 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "map_atlases",
+  "id": "no_more_purple",
   "version": "${version}",
 
-  "name": "Map Atlases",
-  "description": "A vanilla-friendly mini-map/world-map mod using vanilla Maps!",
-  "icon": "assets/map_atlases/icon.png",
+  "name": "No More Purple",
+  "description": "A client-side mod allowing you to choose your enchantment glint color",
+  "icon": "assets/no_more_purple/icon.png",
   "authors": [
     "Pepperoni__Jabroni__"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/map-atlases",
-    "sources": "https://github.com/Pepperoni-Jabroni/MapAtlases",
-    "issues": "https://github.com/Pepperoni-Jabroni/MapAtlases/issues"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/XXX",
+    "sources": "https://github.com/Pepperoni-Jabroni/NoMorePurple",
+    "issues": "https://github.com/Pepperoni-Jabroni/NoMorePurple/issues"
   },
 
   "license": "GPL-3.0",
 
   "environment": "*",
   "entrypoints": {
-    "main": ["pepjebs.mapatlases.MapAtlasesMod"],
-    "client": ["pepjebs.mapatlases.client.MapAtlasesClient"],
-    "modmenu": ["pepjebs.mapatlases.config.MapAtlasesModMenuApiImpl"]
+    "client": ["pepjebs.nomorepurple.client.NoMorePurpleClientMod"]
   },
-  "mixins": [
-    "mapatlases.mixins.json"
-  ],
-  "accessWidener": "mapatlases.accesswidener",
 
   "depends": {
     "fabricloader": ">=0.14.6",
