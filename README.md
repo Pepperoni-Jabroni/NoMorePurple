@@ -31,4 +31,4 @@ Supported values are:
 ![2022-07-28_22 37 53](https://user-images.githubusercontent.com/17690401/181690066-f297d785-60cf-4ab8-8b02-bcc923ebe468.png)
 
 ## Demo: Pink to Rainbow
-![java_VKNugiTAlO](https://user-images.githubusercontent.com/17690401/182007795-288c65b9-d341-4dc5-a50b-be0baacab17c.gif)
+![java_VKNugiTAlO (online-video-cutter](https://user-images.githubusercontent.com/17690401/182008443-77e892a2-760b-4e7b-b556-61e807ea6e3b.gif)
