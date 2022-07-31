@@ -24,11 +24,5 @@ Supported values are:
 - "none": Completely disables glint render layer!
 - "off": Completely vanilla glint (disabled)
 
-## Example: Lime
-![2022-07-28_22 37 45](https://user-images.githubusercontent.com/17690401/181690054-015d04d8-dabe-4aa3-bf42-715f50da4e50.png)
-
-## Example: Rainbow
-![2022-07-28_22 37 53](https://user-images.githubusercontent.com/17690401/181690066-f297d785-60cf-4ab8-8b02-bcc923ebe468.png)
-
 ## Demo: Pink to Rainbow
 ![java_VKNugiTAlO (online-video-cutter](https://user-images.githubusercontent.com/17690401/182008443-77e892a2-760b-4e7b-b556-61e807ea6e3b.gif)
