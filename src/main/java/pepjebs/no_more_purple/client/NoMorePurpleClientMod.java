@@ -36,7 +36,8 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
                             .then(ClientCommandManager.argument(COMMAND_ID, StringArgumentType.string())
                                 .suggests(new GlintColorSuggestionProvider())
                                 .executes(context -> {
-                                    CONFIG.GLINT_COLOR = context.getArgument(COMMAND_ID, String.class);
+                                    CONFIG.glintColor = context.getArgument(COMMAND_ID, String.class);
+                                    AutoConfig.getConfigHolder(NoMorePurpleConfig.class).save();
                                     return 0;
                                 })
                             )
@@ -70,7 +71,7 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
     }
 
     private static int changeColor() {
-        String confColor = CONFIG.GLINT_COLOR;
+        String confColor = CONFIG.glintColor.toLowerCase();
         int color = Arrays.stream(DyeColor.values())
                 .filter(d -> d.getName().compareTo(confColor)==0)
                 .findFirst()

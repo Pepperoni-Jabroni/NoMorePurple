@@ -10,5 +10,5 @@ public class NoMorePurpleConfig implements ConfigData {
 
     @ConfigEntry.Gui.Tooltip()
     @Comment("Set the color of your client's glint.")
-    public String GLINT_COLOR = "RED";
+    public String glintColor = "red";
 }
