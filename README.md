@@ -1,7 +1,7 @@
 # No More Purple
 A client-side mod allowing you to choose your enchantment glint color
 
-<a href="https://www.curseforge.com/minecraft/mc-mods"><img alt="Curseforge" src="https://cf.way2muchnoise.eu/full_436298_downloads.svg"></a> <a href="https://modrinth.com/mod/no-more-purple"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/no-more-purple?label=Modrinth%20Downloads"></a> <a href="https://github.com/Pepperoni-Jabroni/NoMorePurple"><img alt="GitHub" src="https://img.shields.io/github/downloads/Pepperoni-Jabroni/NoMorePurple/total?label=Downloads&logo=github"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/no-more-purple"><img alt="Curseforge" src="https://cf.way2muchnoise.eu/full_664464_downloads.svg"></a> <a href="https://modrinth.com/mod/no-more-purple"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/no-more-purple?label=Modrinth%20Downloads"></a> <a href="https://github.com/Pepperoni-Jabroni/NoMorePurple"><img alt="GitHub" src="https://img.shields.io/github/downloads/Pepperoni-Jabroni/NoMorePurple/total?label=Downloads&logo=github"></a>
 
 Use the config, use ModMenu, or use the `/glint_color <color>` command to set the Glint Color of Enchanted Items on your client.
 Supported values are:
