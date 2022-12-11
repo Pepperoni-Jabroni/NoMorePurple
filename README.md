@@ -7,6 +7,7 @@ A client-side mod allowing you to choose your enchantment glint color!
 <a href="https://www.curseforge.com/minecraft/mc-mods/no-more-purple"><img alt="Curseforge" src="https://cf.way2muchnoise.eu/full_664464_downloads.svg"></a> <a href="https://modrinth.com/mod/no-more-purple"><img alt="Modrinth" src="https://img.shields.io/modrinth/dt/no-more-purple?label=Modrinth%20Downloads"></a> <a href="https://github.com/Pepperoni-Jabroni/NoMorePurple"><img alt="GitHub" src="https://img.shields.io/github/downloads/Pepperoni-Jabroni/NoMorePurple/total?label=Downloads&logo=github"></a>
 </p>
 
+## 📖 About
 Use the config, use ModMenu, or use the `/glint_color <color>` command to set the Glint Color of Enchanted Items on your client.
 Supported values are:
 - "white": The color
@@ -30,5 +31,14 @@ Supported values are:
 - "none": Completely disables glint render layer!
 - "off": Completely vanilla glint (disabled)
 
-## Demo: Pink to Rainbow
+## 📸 Media
+Demo: Pink to Rainbow
+
 ![java_VKNugiTAlO (online-video-cutter](https://user-images.githubusercontent.com/17690401/182008443-77e892a2-760b-4e7b-b556-61e807ea6e3b.gif)
+
+## ⛓ Dependencies
+- Required:
+   - [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+   - [Cloth Config](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
+- Optional:
+   - [Mod Menu](https://www.curseforge.com/minecraft/mc-mods/modmenu)
