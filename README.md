@@ -1,6 +1,5 @@
 <p align="center">
-
-<img src="https://user-images.githubusercontent.com/17690401/206924243-621abe75-73d6-4c25-b9eb-88d764e19ee8.png"/>
+<img src="https://user-images.githubusercontent.com/17690401/206924881-a5468e27-a2fa-4974-821e-c9ef0bc1a777.png"/>
 </br></br>
 A client-side mod allowing you to choose your enchantment glint color!
 </br></br>
