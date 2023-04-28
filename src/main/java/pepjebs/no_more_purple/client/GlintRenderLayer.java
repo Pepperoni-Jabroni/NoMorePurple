@@ -65,7 +65,7 @@ public class GlintRenderLayer extends RenderLayer {
         final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .shader(RenderPhase.GLINT_SHADER)
+                .program(RenderPhase.GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -79,7 +79,7 @@ public class GlintRenderLayer extends RenderLayer {
         final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("entity_glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .shader(RenderPhase.ENTITY_GLINT_SHADER)
+                .program(RenderPhase.ENTITY_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -95,7 +95,7 @@ public class GlintRenderLayer extends RenderLayer {
         final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("glint_direct_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .shader(RenderPhase.DIRECT_GLINT_SHADER)
+                .program(RenderPhase.DIRECT_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -110,7 +110,7 @@ public class GlintRenderLayer extends RenderLayer {
         final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("entity_glint_direct_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .shader(RenderPhase.DIRECT_ENTITY_GLINT_SHADER)
+                .program(RenderPhase.DIRECT_ENTITY_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -124,7 +124,7 @@ public class GlintRenderLayer extends RenderLayer {
         final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("armor_glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .shader(RenderPhase.ARMOR_GLINT_SHADER)
+                .program(RenderPhase.ARMOR_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -139,7 +139,7 @@ public class GlintRenderLayer extends RenderLayer {
         final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("armor_entity_glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .shader(RenderPhase.ARMOR_ENTITY_GLINT_SHADER)
+                .program(RenderPhase.ARMOR_ENTITY_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -154,7 +154,7 @@ public class GlintRenderLayer extends RenderLayer {
         final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("glint_translucent_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, RenderLayer.MultiPhaseParameters.builder()
-                .shader(TRANSLUCENT_GLINT_SHADER)
+                .program(TRANSLUCENT_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
