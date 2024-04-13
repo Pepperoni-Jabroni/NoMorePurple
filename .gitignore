@@ -27,6 +27,7 @@ bin/
 # macos
 
 *.DS_Store
+gradle/.DS_Store
 
 # fabric
 
