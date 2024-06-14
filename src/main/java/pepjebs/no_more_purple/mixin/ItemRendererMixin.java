@@ -17,11 +17,6 @@ import pepjebs.no_more_purple.client.NoMorePurpleClientMod;
 @Environment(EnvType.CLIENT)
 public abstract class ItemRendererMixin {
 
-    @Redirect(method = "getArmorGlintConsumer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;getArmorGlint()Lnet/minecraft/client/render/RenderLayer;"))
-    private static RenderLayer getArmorGlint() {
-        return NoMorePurpleClientMod.getArmorGlint();
-    }
-
     @Redirect(method = "getArmorGlintConsumer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;getArmorEntityGlint()Lnet/minecraft/client/render/RenderLayer;"))
     private static RenderLayer getArmorEntityGlint() {
         return NoMorePurpleClientMod.getArmorEntityGlint();
@@ -37,9 +32,9 @@ public abstract class ItemRendererMixin {
         return NoMorePurpleClientMod.getEntityGlint();
     }
 
-    @Redirect(method = "getDirectItemGlintConsumer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;getDirectGlint()Lnet/minecraft/client/render/RenderLayer;"))
+    @Redirect(method = "getDirectItemGlintConsumer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;getGlint()Lnet/minecraft/client/render/RenderLayer;"))
     private static RenderLayer getGlintDirect() {
-        return NoMorePurpleClientMod.getGlintDirect();
+        return NoMorePurpleClientMod.getGlint();
     }
 
     @Redirect(method = "getDirectItemGlintConsumer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;getDirectEntityGlint()Lnet/minecraft/client/render/RenderLayer;"))

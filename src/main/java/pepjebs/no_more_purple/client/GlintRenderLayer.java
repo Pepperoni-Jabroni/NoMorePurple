@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.*;
+import net.minecraft.client.util.BufferAllocator;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import pepjebs.no_more_purple.client.NoMorePurpleClientMod;
@@ -28,7 +29,7 @@ public class GlintRenderLayer extends RenderLayer {
 
     public static List<RenderLayer> translucentGlintColor = newRenderList(GlintRenderLayer::buildTranslucentGlint);
 
-    public static void addGlintTypes(Object2ObjectLinkedOpenHashMap<RenderLayer, BufferBuilder> map) {
+    public static void addGlintTypes(Object2ObjectLinkedOpenHashMap<RenderLayer, BufferAllocator> map) {
         addGlintTypes(map, glintColor);
         addGlintTypes(map, entityGlintColor);
         addGlintTypes(map, glintDirectColor);
@@ -55,14 +56,14 @@ public class GlintRenderLayer extends RenderLayer {
         return list;
     }
 
-    public static void addGlintTypes(Object2ObjectLinkedOpenHashMap<RenderLayer, BufferBuilder> map, List<RenderLayer> typeList) {
+    public static void addGlintTypes(Object2ObjectLinkedOpenHashMap<RenderLayer, BufferAllocator> map, List<RenderLayer> typeList) {
         for(RenderLayer renderType : typeList)
             if (!map.containsKey(renderType))
-                map.put(renderType, new BufferBuilder(renderType.getExpectedBufferSize()));
+                map.put(renderType, new BufferAllocator(renderType.getExpectedBufferSize()));
     }
 
     private static RenderLayer buildGlintRenderLayer(String name) {
-        final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
+        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
                 .program(RenderPhase.GLINT_PROGRAM)
@@ -76,7 +77,7 @@ public class GlintRenderLayer extends RenderLayer {
     }
 
     private static RenderLayer buildEntityGlintRenderLayer(String name) {
-        final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
+        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("entity_glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
                 .program(RenderPhase.ENTITY_GLINT_PROGRAM)
@@ -92,10 +93,10 @@ public class GlintRenderLayer extends RenderLayer {
 
 
     private static RenderLayer buildGlintDirectRenderLayer(String name) {
-        final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
+        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("glint_direct_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .program(RenderPhase.DIRECT_GLINT_PROGRAM)
+                .program(RenderPhase.DIRECT_ENTITY_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -107,7 +108,7 @@ public class GlintRenderLayer extends RenderLayer {
 
 
     private static RenderLayer buildEntityGlintDirectRenderLayer(String name) {
-        final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
+        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("entity_glint_direct_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
                 .program(RenderPhase.DIRECT_ENTITY_GLINT_PROGRAM)
@@ -121,10 +122,10 @@ public class GlintRenderLayer extends RenderLayer {
     }
 
     private static RenderLayer buildArmorGlintRenderLayer(String name) {
-        final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
+        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("armor_glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-                .program(RenderPhase.ARMOR_GLINT_PROGRAM)
+                .program(RenderPhase.ARMOR_ENTITY_GLINT_PROGRAM)
                 .texture(new Texture(res, true, false))
                 .writeMaskState(COLOR_MASK)
                 .cull(DISABLE_CULLING)
@@ -136,7 +137,7 @@ public class GlintRenderLayer extends RenderLayer {
     }
 
     private static RenderLayer buildArmorEntityGlintRenderLayer(String name) {
-        final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
+        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("armor_entity_glint_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
                 .program(RenderPhase.ARMOR_ENTITY_GLINT_PROGRAM)
@@ -151,7 +152,7 @@ public class GlintRenderLayer extends RenderLayer {
     }
 
     private static RenderLayer buildTranslucentGlint(String name) {
-        final Identifier res = new Identifier(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
+        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
 
         return RenderLayer.of("glint_translucent_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, RenderLayer.MultiPhaseParameters.builder()
                 .program(TRANSLUCENT_GLINT_PROGRAM)

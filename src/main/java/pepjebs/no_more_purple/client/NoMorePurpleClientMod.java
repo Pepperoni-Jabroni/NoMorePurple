@@ -106,27 +106,11 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
     }
 
     @Environment(EnvType.CLIENT)
-    public static RenderLayer getGlintDirect() {
-        int color = changeColor();
-        if (color == -1)
-            return RenderLayer.getDirectGlint();
-        return GlintRenderLayer.glintDirectColor.get(color);
-    }
-
-    @Environment(EnvType.CLIENT)
     public static RenderLayer getEntityGlintDirect() {
         int color = changeColor();
         if (color == -1)
             return RenderLayer.getDirectEntityGlint();
         return GlintRenderLayer.entityGlintDirectColor.get(color);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static RenderLayer getArmorGlint() {
-        int color = changeColor();
-        if (color == -1)
-            return RenderLayer.getArmorGlint();
-        return GlintRenderLayer.armorGlintColor.get(color);
     }
 
     @Environment(EnvType.CLIENT)
