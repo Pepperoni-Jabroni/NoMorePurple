@@ -53,9 +53,9 @@ public class GlintRenderLayer extends RenderLayer {
     }
 
     public static void addGlintTypes(Object2ObjectLinkedOpenHashMap<RenderLayer, BufferAllocator> map, List<RenderLayer> typeList) {
-        for (RenderLayer renderType : typeList)
-            if (!map.containsKey(renderType))
-                map.put(renderType, new BufferAllocator(renderType.getExpectedBufferSize()));
+        for (RenderLayer renderType : typeList) {
+            map.computeIfAbsent(renderType, layer -> new BufferAllocator(((RenderLayer) layer).getExpectedBufferSize()));
+        }
     }
 
     private static RenderLayer buildGlintRenderLayer(String name) {
@@ -86,36 +86,6 @@ public class GlintRenderLayer extends RenderLayer {
                 .texturing(ENTITY_GLINT_TEXTURING)
                 .build(false));
     }
-
-
-//    private static RenderLayer buildGlintDirectRenderLayer(String name) {
-//        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
-//
-//        return RenderLayer.of("glint_direct_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-//                .program(RenderPhase.DIRECT_ENTITY_GLINT_PROGRAM)
-//                .texture(new Texture(res, TriState.TRUE, false))
-//                .writeMaskState(COLOR_MASK)
-//                .cull(DISABLE_CULLING)
-//                .depthTest(EQUAL_DEPTH_TEST)
-//                .transparency(GLINT_TRANSPARENCY)
-//                .texturing(GLINT_TEXTURING)
-//                .build(false));
-//    }
-//
-//
-//    private static RenderLayer buildEntityGlintDirectRenderLayer(String name) {
-//        final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");
-//
-//        return RenderLayer.of("entity_glint_direct_" + name, VertexFormats.POSITION_TEXTURE, VertexFormat.DrawMode.QUADS, 256, MultiPhaseParameters.builder()
-//                .program(RenderPhase.DIRECT_ENTITY_GLINT_PROGRAM)
-//                .texture(new Texture(res, TriState.TRUE, false))
-//                .writeMaskState(COLOR_MASK)
-//                .cull(DISABLE_CULLING)
-//                .depthTest(EQUAL_DEPTH_TEST)
-//                .transparency(GLINT_TRANSPARENCY)
-//                .texturing(ENTITY_GLINT_TEXTURING)
-//                .build(false));
-//    }
 
     private static RenderLayer buildArmorGlintRenderLayer(String name) {
         final Identifier res = Identifier.of(NoMorePurpleClientMod.MOD_ID, "textures/misc/glint_" + name + ".png");

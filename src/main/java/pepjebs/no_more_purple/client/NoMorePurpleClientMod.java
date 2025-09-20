@@ -1,6 +1,10 @@
 package pepjebs.no_more_purple.client;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntRBTreeMap;
+import it.unimi.dsi.fastutil.objects.Object2IntSortedMaps;
+import it.unimi.dsi.fastutil.objects.ObjectImmutableList;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
@@ -10,11 +14,11 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.DyeColor;
+import net.minecraft.util.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pepjebs.no_more_purple.config.NoMorePurpleConfig;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class NoMorePurpleClientMod implements ClientModInitializer {
@@ -24,28 +28,33 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static NoMorePurpleConfig CONFIG = null;
 
-    private static final List<String> ALL_GLINT_COLORS = List.of(
-            "white",
-            "orange",
-            "magenta",
-            "light_blue",
-            "yellow",
-            "lime",
-            "pink",
-            "gray",
-            "light_gray",
-            "cyan",
-            "purple",
-            "blue",
-            "brown",
-            "green",
-            "red",
-            "black",
-            "rainbow",
-            "light",
-            "none",
-            "off"
-    );
+    private static final List<String> ALL_GLINT_COLORS = Util.make(() -> {
+        final var colors = DyeColor.values();
+        final var array = new String[colors.length + 4];
+        int i = 0;
+        for (; i < colors.length; i++) {
+            array[i] = colors[i].getName();
+        }
+        array[i++] = "rainbow";
+        array[i++] = "light";
+        array[i++] = "none";
+        array[i] = "off";
+        return new ObjectImmutableList<>(array);
+    });
+
+    private static final Object2IntMap<String> COLOR_NAME_TO_ID = Util.make(() -> {
+        final var map = new Object2IntRBTreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        map.defaultReturnValue(-1);
+        final var colors = DyeColor.values();
+        map.put("rainbow", colors.length);
+        map.put("light", colors.length + 1);
+        map.put("none", colors.length + 2);
+        map.put("off", -1);
+        for (final var color : colors) {
+            map.put(color.getName(), color.getId());
+        }
+        return Object2IntSortedMaps.unmodifiable(map);
+    });
 
     @Override
     public void onInitializeClient() {
@@ -75,21 +84,7 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
 
     private static int changeColor() {
         String confColor = CONFIG.glintColor.toLowerCase();
-        int color = Arrays.stream(DyeColor.values())
-                .filter(d -> d.getName().compareTo(confColor) == 0)
-                .mapToInt(DyeColor::getId)
-                .findFirst()
-                .orElse(-1);
-        if (confColor.compareTo("rainbow") == 0) {
-            color = DyeColor.values().length;
-        } else if (confColor.compareTo("light") == 0){
-            color = DyeColor.values().length + 1;
-        } else if (confColor.compareTo("none") == 0){
-            color = DyeColor.values().length + 2;
-        } else if (confColor.compareTo("off") == 0){
-            color = -1;
-        }
-        return color;
+        return COLOR_NAME_TO_ID.getOrDefault(confColor, -1);
     }
 
     @Environment(EnvType.CLIENT)
