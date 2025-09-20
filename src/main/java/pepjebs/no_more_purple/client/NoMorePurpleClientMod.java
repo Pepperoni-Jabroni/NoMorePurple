@@ -28,7 +28,10 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static NoMorePurpleConfig CONFIG = null;
 
-    private static final List<String> ALL_GLINT_COLORS = Util.make(() -> {
+    static final List<String> ALL_GLINT_COLORS_WITHOUT_OFF;
+    private static final List<String> ALL_GLINT_COLORS;
+
+    static {
         final var colors = DyeColor.values();
         final var array = new String[colors.length + 4];
         int i = 0;
@@ -39,8 +42,9 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
         array[i++] = "light";
         array[i++] = "none";
         array[i] = "off";
-        return new ObjectImmutableList<>(array);
-    });
+        ALL_GLINT_COLORS_WITHOUT_OFF = new ObjectImmutableList<>(array, 0, array.length - 1);
+        ALL_GLINT_COLORS = new ObjectImmutableList<>(array);
+    }
 
     private static final Object2IntMap<String> COLOR_NAME_TO_ID = Util.make(() -> {
         final var map = new Object2IntRBTreeMap<>(String.CASE_INSENSITIVE_ORDER);

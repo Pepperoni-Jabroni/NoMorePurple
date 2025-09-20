@@ -1,15 +1,14 @@
 package pepjebs.no_more_purple.client;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.BufferAllocator;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TriState;
 
@@ -19,13 +18,13 @@ import net.minecraft.util.TriState;
 @Environment(EnvType.CLIENT)
 public class GlintRenderLayer extends RenderLayer {
 
-    public static List<RenderLayer> glintColor = newRenderList(GlintRenderLayer::buildGlintRenderLayer);
-    public static List<RenderLayer> entityGlintColor = newRenderList(GlintRenderLayer::buildEntityGlintRenderLayer);
+    public static final List<RenderLayer> glintColor = newRenderList(GlintRenderLayer::buildGlintRenderLayer);
+    public static final List<RenderLayer> entityGlintColor = newRenderList(GlintRenderLayer::buildEntityGlintRenderLayer);
 
-    public static List<RenderLayer> armorGlintColor = newRenderList(GlintRenderLayer::buildArmorGlintRenderLayer);
-    public static List<RenderLayer> armorEntityGlintColor = newRenderList(GlintRenderLayer::buildArmorEntityGlintRenderLayer);
+    public static final List<RenderLayer> armorGlintColor = newRenderList(GlintRenderLayer::buildArmorGlintRenderLayer);
+    public static final List<RenderLayer> armorEntityGlintColor = newRenderList(GlintRenderLayer::buildArmorEntityGlintRenderLayer);
 
-    public static List<RenderLayer> translucentGlintColor = newRenderList(GlintRenderLayer::buildTranslucentGlint);
+    public static final List<RenderLayer> translucentGlintColor = newRenderList(GlintRenderLayer::buildTranslucentGlint);
 
     public static void addGlintTypes(Object2ObjectLinkedOpenHashMap<RenderLayer, BufferAllocator> map) {
         addGlintTypes(map, glintColor);
@@ -40,16 +39,13 @@ public class GlintRenderLayer extends RenderLayer {
     }
 
     private static List<RenderLayer> newRenderList(Function<String, RenderLayer> func) {
-        ArrayList<RenderLayer> list = new ArrayList<>(DyeColor.values().length + 3);
+        final var colorNames = NoMorePurpleClientMod.ALL_GLINT_COLORS_WITHOUT_OFF;
+        final var array = new RenderLayer[colorNames.size()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = func.apply(colorNames.get(i));
+        }
 
-        for (DyeColor color : DyeColor.values())
-            list.add(func.apply(color.getName()));
-
-        list.add(func.apply("rainbow"));
-        list.add(func.apply("light"));
-        list.add(func.apply("none"));
-
-        return list;
+        return new ObjectImmutableList<>(array);
     }
 
     public static void addGlintTypes(Object2ObjectLinkedOpenHashMap<RenderLayer, BufferAllocator> map, List<RenderLayer> typeList) {
