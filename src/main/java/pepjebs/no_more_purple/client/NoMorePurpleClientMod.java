@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import pepjebs.no_more_purple.config.NoMorePurpleConfig;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class NoMorePurpleClientMod implements ClientModInitializer {
 
@@ -22,6 +23,29 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
     public static final String COMMAND_ID = "glint_color";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static NoMorePurpleConfig CONFIG = null;
+
+    private static final List<String> ALL_GLINT_COLORS = List.of(
+            "white",
+            "orange",
+            "magenta",
+            "light_blue",
+            "yellow",
+            "lime",
+            "pink",
+            "gray",
+            "light_gray",
+            "cyan",
+            "purple",
+            "blue",
+            "brown",
+            "green",
+            "red",
+            "black",
+            "rainbow",
+            "light",
+            "none",
+            "off"
+    );
 
     @Override
     public void onInitializeClient() {
@@ -45,29 +69,8 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
         });
     }
 
-    public static String[] listGlintColors() {
-        return new String[]{
-                "white",
-                "orange",
-                "magenta",
-                "light_blue",
-                "yellow",
-                "lime",
-                "pink",
-                "gray",
-                "light_gray",
-                "cyan",
-                "purple",
-                "blue",
-                "brown",
-                "green",
-                "red",
-                "black",
-                "rainbow",
-                "light",
-                "none",
-                "off"
-        };
+    public static List<String> listGlintColors() {
+        return ALL_GLINT_COLORS;
     }
 
     private static int changeColor() {
@@ -103,14 +106,6 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
         if (color == -1)
             return RenderLayer.getEntityGlint();
         return GlintRenderLayer.entityGlintColor.get(color);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static RenderLayer getEntityGlintDirect() {
-        int color = changeColor();
-        if (color == -1)
-            return RenderLayer.getDirectEntityGlint();
-        return GlintRenderLayer.entityGlintDirectColor.get(color);
     }
 
     @Environment(EnvType.CLIENT)
