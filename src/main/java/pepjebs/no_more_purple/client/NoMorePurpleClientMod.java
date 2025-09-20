@@ -73,9 +73,9 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
     private static int changeColor() {
         String confColor = CONFIG.glintColor.toLowerCase();
         int color = Arrays.stream(DyeColor.values())
-                .filter(d -> d.getName().compareTo(confColor)==0)
+                .filter(d -> d.getName().compareTo(confColor) == 0)
+                .mapToInt(DyeColor::getId)
                 .findFirst()
-                .map(DyeColor::getId)
                 .orElse(-1);
         if (confColor.compareTo("rainbow") == 0) {
             color = DyeColor.values().length;

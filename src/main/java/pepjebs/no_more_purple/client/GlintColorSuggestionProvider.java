@@ -14,7 +14,7 @@ public class GlintColorSuggestionProvider implements SuggestionProvider<FabricCl
     public CompletableFuture<Suggestions> getSuggestions(
             CommandContext<FabricClientCommandSource> context,
             SuggestionsBuilder builder) throws CommandSyntaxException {
-        for(var test : NoMorePurpleClientMod.listGlintColors()) {
+        for (String test : NoMorePurpleClientMod.listGlintColors()) {
             builder.suggest(test);
         }
         return builder.buildFuture();
