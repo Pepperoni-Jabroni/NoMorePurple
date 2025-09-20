@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pepjebs.no_more_purple.config.NoMorePurpleConfig;
@@ -46,7 +45,9 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
         ALL_GLINT_COLORS = new ObjectImmutableList<>(array);
     }
 
-    private static final Object2IntMap<String> COLOR_NAME_TO_ID = Util.make(() -> {
+    private static final Object2IntMap<String> COLOR_NAME_TO_ID;
+
+    static {
         final var map = new Object2IntRBTreeMap<>(String.CASE_INSENSITIVE_ORDER);
         map.defaultReturnValue(-1);
         final var colors = DyeColor.values();
@@ -57,8 +58,8 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
         for (final var color : colors) {
             map.put(color.getName(), color.getId());
         }
-        return Object2IntSortedMaps.unmodifiable(map);
-    });
+        COLOR_NAME_TO_ID = Object2IntSortedMaps.unmodifiable(map);
+    }
 
     @Override
     public void onInitializeClient() {
