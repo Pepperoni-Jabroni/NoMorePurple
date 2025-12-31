@@ -1,6 +1,10 @@
 package pepjebs.no_more_purple.client;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntRBTreeMap;
+import it.unimi.dsi.fastutil.objects.Object2IntSortedMaps;
+import it.unimi.dsi.fastutil.objects.ObjectImmutableList;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;
@@ -14,7 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pepjebs.no_more_purple.config.NoMorePurpleConfig;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class NoMorePurpleClientMod implements ClientModInitializer {
 
@@ -22,6 +26,40 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
     public static final String COMMAND_ID = "glint_color";
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
     public static NoMorePurpleConfig CONFIG = null;
+
+    static final List<String> ALL_GLINT_COLORS_WITHOUT_OFF;
+    private static final List<String> ALL_GLINT_COLORS;
+
+    static {
+        final var colors = DyeColor.values();
+        final var array = new String[colors.length + 4];
+        int i = 0;
+        for (; i < colors.length; i++) {
+            array[i] = colors[i].getName();
+        }
+        array[i++] = "rainbow";
+        array[i++] = "light";
+        array[i++] = "none";
+        array[i] = "off";
+        ALL_GLINT_COLORS_WITHOUT_OFF = new ObjectImmutableList<>(array, 0, array.length - 1);
+        ALL_GLINT_COLORS = new ObjectImmutableList<>(array);
+    }
+
+    private static final Object2IntMap<String> COLOR_NAME_TO_ID;
+
+    static {
+        final var map = new Object2IntRBTreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        map.defaultReturnValue(-1);
+        final var colors = DyeColor.values();
+        map.put("rainbow", colors.length);
+        map.put("light", colors.length + 1);
+        map.put("none", colors.length + 2);
+        map.put("off", -1);
+        for (final var color : colors) {
+            map.put(color.getName(), color.getId());
+        }
+        COLOR_NAME_TO_ID = Object2IntSortedMaps.unmodifiable(map);
+    }
 
     @Override
     public void onInitializeClient() {
@@ -45,48 +83,13 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
         });
     }
 
-    public static String[] listGlintColors() {
-        return new String[]{
-                "white",
-                "orange",
-                "magenta",
-                "light_blue",
-                "yellow",
-                "lime",
-                "pink",
-                "gray",
-                "light_gray",
-                "cyan",
-                "purple",
-                "blue",
-                "brown",
-                "green",
-                "red",
-                "black",
-                "rainbow",
-                "light",
-                "none",
-                "off"
-        };
+    public static List<String> listGlintColors() {
+        return ALL_GLINT_COLORS;
     }
 
     private static int changeColor() {
         String confColor = CONFIG.glintColor.toLowerCase();
-        int color = Arrays.stream(DyeColor.values())
-                .filter(d -> d.getName().compareTo(confColor)==0)
-                .findFirst()
-                .map(DyeColor::getId)
-                .orElse(-1);
-        if (confColor.compareTo("rainbow") == 0) {
-            color = DyeColor.values().length;
-        } else if (confColor.compareTo("light") == 0){
-            color = DyeColor.values().length + 1;
-        } else if (confColor.compareTo("none") == 0){
-            color = DyeColor.values().length + 2;
-        } else if (confColor.compareTo("off") == 0){
-            color = -1;
-        }
-        return color;
+        return COLOR_NAME_TO_ID.getOrDefault(confColor, -1);
     }
 
     @Environment(EnvType.CLIENT)
@@ -103,14 +106,6 @@ public class NoMorePurpleClientMod implements ClientModInitializer {
         if (color == -1)
             return RenderLayer.getEntityGlint();
         return GlintRenderLayer.entityGlintColor.get(color);
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static RenderLayer getEntityGlintDirect() {
-        int color = changeColor();
-        if (color == -1)
-            return RenderLayer.getDirectEntityGlint();
-        return GlintRenderLayer.entityGlintDirectColor.get(color);
     }
 
     @Environment(EnvType.CLIENT)

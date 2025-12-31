@@ -32,14 +32,4 @@ public abstract class ItemRendererMixin {
         return NoMorePurpleClientMod.getEntityGlint();
     }
 
-    @Redirect(method = "getDirectItemGlintConsumer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;getGlint()Lnet/minecraft/client/render/RenderLayer;"))
-    private static RenderLayer getGlintDirect() {
-        return NoMorePurpleClientMod.getGlint();
-    }
-
-    @Redirect(method = "getDirectItemGlintConsumer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/RenderLayer;getDirectEntityGlint()Lnet/minecraft/client/render/RenderLayer;"))
-    private static RenderLayer getEntityGlintDirect() {
-        return NoMorePurpleClientMod.getEntityGlintDirect();
-    }
-
 }
