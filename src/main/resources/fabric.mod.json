@@ -25,12 +25,12 @@
   "mixins": [
     "no_more_purple.mixins.json"
   ],
-  "accessWidener": "no_more_purple.accesswidener",
+  "accessWidener": "no_more_purple.classtweaker",
 
   "depends": {
-    "fabricloader": ">=0.16.14",
+    "fabricloader": ">=0.18.2",
     "fabric": "*",
-    "minecraft": ["1.21.4"],
+    "minecraft": ["1.21.11"],
     "java": ">=21"
   }
 }
